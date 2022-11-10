@@ -3,10 +3,23 @@ const nextConfig = {
   reactStrictMode: false,
   swcMinify: true,
   images: {
-    domains: ["pfsrealty.com"]
+    domains: ["pfsrealty.com", "res.cloudinary.com"]
   },
-  env: {
-    MAPS_API: process.env.MAPS_API,
+  compiler: {
+    styledComponents: true
+  },
+  webpack: config => {
+    config.module.rules.push({
+      test: /\.(png|jpg|gif)$/,
+      use: [
+        {
+          loader: 'file-loader',
+          options: {}
+        }
+      ]
+    })
+
+    return config
   }
 }
 

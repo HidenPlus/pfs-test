@@ -75,4 +75,5 @@ export const SearchBarButton = styled.button`
     font-weight: 600;
     border-radius: 0 5px 5px 0;
     z-index: 3;
+    cursor: pointer;
 `

@@ -1,6 +1,7 @@
 import { GetStaticProps, InferGetStaticPropsType } from "next"
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import HomeSearch from "../components/HomeSearch";
 
 const NavHeader = dynamic<NavHeaderProps>(() => import("../components/NavHeader"), { ssr: false });
@@ -25,12 +26,12 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
 }
 
 export default function Home({menuItems}: InferGetStaticPropsType<typeof getStaticProps>) {
-  console.log(menuItems);
+  const router = useRouter();
   return (
     <>
     <NavHeader 
       menuItems={menuItems.result}
-      title={<Image width={180} height={50} src="https://pfsrealty.com/wp-content/uploads/2021/10/PFS.png" alt="Logo image" />}
+      title={<Image onClick={() => router.push("/")} width={180} height={50} src="https://pfsrealty.com/wp-content/uploads/2021/10/PFS.png" alt="Logo image" />}
     />
     <HomeSearch></HomeSearch>
     </>

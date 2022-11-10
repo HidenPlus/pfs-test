@@ -2,6 +2,10 @@ import Image from "next/image"
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 import dynamic from "next/dynamic";
 import MapComponent from "../components/MapComponent";
+import { useRouter } from "next/router";
+import { HousesLayout, MapAndHousesLayout } from "../components/BuyoutComponent/styles";
+import BuyoutComponent from "../components/BuyoutComponent";
+import { useState } from "react";
 
 const NavHeader = dynamic<NavHeaderProps>(() => import("../components/NavHeader"), { ssr: false });
 
@@ -25,14 +29,24 @@ type PageProps = {
   }
 
 export default function HousesAndApartments({menuItems}: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
+  const [dataQuery, setDataQuery] = useState([]);
+  const router = useRouter();
   return (
     <>
         <NavHeader 
-        title={<Image width={180} height={50} src="https://pfsrealty.com/wp-content/uploads/2021/10/PFS.png" alt="Logo image" />}
-        menuItems={menuItems.result}
+          title={<Image width={180} 
+          onClick={() => router.push("/")} 
+          height={50} 
+          src="https://pfsrealty.com/wp-content/uploads/2021/10/PFS.png" 
+          alt="Logo image" />
+          }
+          menuItems={menuItems.result}
         />
         <>
-        <MapComponent />
+          <MapAndHousesLayout>
+            <BuyoutComponent dataQuery={dataQuery} />
+            <MapComponent setDataQuery={setDataQuery} />
+          </MapAndHousesLayout>
         </>
     </>
   )
