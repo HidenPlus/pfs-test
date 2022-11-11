@@ -1,8 +1,6 @@
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
-import { Provider } from 'react-redux'
 import { GlobalStyle } from '../styles/global.styles'
-import {store} from "../app/redux/store";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -26,9 +24,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <meta name="description" content={pageProps.description} />
     </Head>
     <GlobalStyle />
-    <Provider store={store}>
-      <Component {...pageProps} />
-    </Provider>
+    <Component {...pageProps} />
     </>
   )
 }

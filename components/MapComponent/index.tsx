@@ -1,48 +1,33 @@
 import GoogleMapReact from "google-map-react";
-import { useEffect, useRef, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import useSWR from "swr";
 import Image from "next/image"
 import { CloseButton, HouseInfo, HouseInfoLayout, MarkerInfo, MarkerInfoLayout, MarkerParent, MarkerStyled, ShowPropertiesButton } from "./styles";
 import LocationSearchInput from "./LocationSearchInput";
 import { useRouter } from "next/router";
-import { formatPrice } from "../../lib/utils";
+import { formatPrice, stringToCoordinate } from "../../lib/utils";
 
 
 const { MAPS_API, URL } = process.env;
 const fetcher = (url: string) => fetch(url).then(r => r.json())
 
-function getDistanceFromLatLonInKm(lat1: number, lon1: number, lat2: number, lon2: number ) {
-  var R = 6371; // Radius of the earth in km
-  var dLat = deg2rad(lat2-lat1);  // deg2rad below
-  var dLon = deg2rad(lon2-lon1); 
-  var a = 
-    Math.sin(dLat/2) * Math.sin(dLat/2) +
-    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
-    Math.sin(dLon/2) * Math.sin(dLon/2)
-    ; 
-  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-  var d = R * c; // Distance in km
-  return d;
+const MarkerLayout = ({ children }: { children: React.ReactNode, lat: number, lng: number }) => <MarkerParent>{children}</MarkerParent>
+
+const Marker = ({ text, onClick }: { text: React.ReactNode, onClick: any }) => <MarkerStyled onClick={onClick}>{text}</MarkerStyled>;
+
+interface Props {
+  setDataQuery: Dispatch<SetStateAction<never[]>>;
+  order: string;
+  skip: number;
+  setSkip: Dispatch<SetStateAction<number>>;
 }
 
-function deg2rad(deg: number) {
-  return deg * (Math.PI/180)
-}
-
-const MarkerLayout = ({ children }: any) => <MarkerParent>{children}</MarkerParent>
-
-const Marker = ({ text, onClick }: any) => <MarkerStyled onClick={onClick}>{text}</MarkerStyled>;
-
-export default function MapComponent({setDataQuery}: any): JSX.Element {
+export default function MapComponent({ setDataQuery, order, skip, setSkip }: Props): JSX.Element {
   const [prevCoords, setPrevCoords] = useState({lat: 0, lng: 0});
   const [searchCoords, setSearchCoords] = useState({lat: 0, lng: 0});
   const [cityQuery, setCityQuery] = useState("");
   const router = useRouter();
-  const {data, error} = useSWR(`/api/get-data-coord?city=${cityQuery}`, fetcher)
-
-  const stringToCoordinate = (coord: string) => {
-    return parseFloat(coord.replace(/^([^,]+),/, "$1.").replace(",", ""))
-  }
+  const {data, error} = useSWR(`/api/get-data-coord?city=${cityQuery}&order=${order}&page=${skip}`, fetcher)
 
   const defaultProps = {
     center: {
@@ -59,12 +44,14 @@ export default function MapComponent({setDataQuery}: any): JSX.Element {
   }, [router])
 
   useEffect(() => {
-    setDataQuery(data);
-  }, [data])
+    if(router.query.page){
+      setSkip(Number(router.query.page))
+    }
+  }, [router.query])
 
   useEffect(() => {
-    console.log(searchCoords);
-  }, [searchCoords])
+    setDataQuery(data);
+  }, [data])
   
   return (
     <div style={{ height: "75vh", width: "40vw", borderRadius: "20px", marginTop: "5vh" }}>
@@ -98,9 +85,13 @@ export default function MapComponent({setDataQuery}: any): JSX.Element {
   );
 }
 
-function MarkerItem({item}: any) {
+interface MarkerItemProps {
+  item: any;
+}
 
+function MarkerItem({item}: MarkerItemProps) {
   const [showInfo, setShowInfo] = useState(false);
+  const router = useRouter();
 
   return (
     <>
@@ -115,7 +106,7 @@ function MarkerItem({item}: any) {
             <CloseButton onClick={() => setShowInfo(false)}>X</CloseButton>
             <HouseInfo>{item.address}</HouseInfo>
             <p>{formatPrice(JSON.parse(item.json_data).listPrice)}</p>
-            <ShowPropertiesButton>Ver propiedad</ShowPropertiesButton>
+            <ShowPropertiesButton onClick={() => router.push(`/houses-and-apartments/${item.id}`)}>Ver propiedad</ShowPropertiesButton>
           </HouseInfoLayout>
         </MarkerInfoLayout>
       </MarkerInfo>

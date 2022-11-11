@@ -16,7 +16,12 @@ export default function HomeSearch(): JSX.Element {
     )
 }
 
-function SearchBarComponent({value, setValue}: {value: string, setValue: (value: string) => void}): JSX.Element {7
+interface Props {
+    value: string; 
+    setValue: (value: string) => void
+}
+
+function SearchBarComponent({value, setValue}: Props): JSX.Element {7
     const router = useRouter();
 
     const handleSearch = () => {

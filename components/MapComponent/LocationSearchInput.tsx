@@ -14,6 +14,9 @@ function LocationSearchInput({searchCoords, setSearchCoords, setCityQuery}: Prop
     setCityQuery(value);
     const results = await geocodeByAddress(value);
     const latLng = await getLatLng(results[0]);
+    const url = new URL(window.location.href);
+    url.searchParams.set('city', value);
+    window.history.replaceState(null, "", url);
     setSearchCoords(latLng);
   };
 

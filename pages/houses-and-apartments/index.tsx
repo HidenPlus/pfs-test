@@ -1,13 +1,13 @@
 import Image from "next/image"
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 import dynamic from "next/dynamic";
-import MapComponent from "../components/MapComponent";
+import MapComponent from "../../components/MapComponent";
 import { useRouter } from "next/router";
-import { HousesLayout, MapAndHousesLayout } from "../components/BuyoutComponent/styles";
-import BuyoutComponent from "../components/BuyoutComponent";
+import { MapAndHousesLayout } from "../../components/BuyoutComponent/styles";
+import BuyoutComponent from "../../components/BuyoutComponent";
 import { useState } from "react";
 
-const NavHeader = dynamic<NavHeaderProps>(() => import("../components/NavHeader"), { ssr: false });
+const NavHeader = dynamic<NavHeaderProps>(() => import("../../components/NavHeader"), { ssr: false });
 
 type PageProps = {
     menuItems: {result: MenuItem[]};
@@ -30,6 +30,8 @@ type PageProps = {
 
 export default function HousesAndApartments({menuItems}: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
   const [dataQuery, setDataQuery] = useState([]);
+  const [order, setOrder] = useState("");
+  const [skip, setSkip] = useState(1);
   const router = useRouter();
   return (
     <>
@@ -44,8 +46,8 @@ export default function HousesAndApartments({menuItems}: InferGetStaticPropsType
         />
         <>
           <MapAndHousesLayout>
-            <BuyoutComponent dataQuery={dataQuery} />
-            <MapComponent setDataQuery={setDataQuery} />
+            <BuyoutComponent skip={skip} setSkip={setSkip} setOrder={setOrder} dataQuery={dataQuery} />
+            <MapComponent setSkip={setSkip} skip={skip} order={order} setDataQuery={setDataQuery} />
           </MapAndHousesLayout>
         </>
     </>

@@ -3,34 +3,34 @@ import clientPromise from "../../lib/mongodb";
 
 const ORDER_ITEMS: Record<string, Record<string, number>> = {
     newest: {
-        date: -1,
+        list_date: -1,
     },
     oldest: {
-        date: 1,
+        list_date: 1,
     },
     mostPrice: {
-        price: -1,
+        naturalPrice: -1,
     },
     lessPrice: {
-        price: 1,
+        naturalPrice: 1,
     },
     mostBath: {
-        bath: -1,
+        property_bathsFull: -1,
     },
     lessBath: {
-        bath: 1,
+        property_bathsFull: 1,
     },
     mostBedrooms: {
-        bedrooms: -1,
+        property_bedrooms: -1,
     },
     lessBedrooms: {
-        bedrooms: 1,
+        property_bedrooms: 1,
     },
     mostArea: {
-        area: -1,
+        property_area: -1,
     },
     lessArea: {
-        area: 1,
+        property_area: 1,
     },
 }
 
@@ -39,10 +39,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         try{
             const client = await clientPromise;
             const db = client.db("pfs-test");
+            // Obtain filters and queries from the request
             const order = ORDER_ITEMS[req.query.order as string || 'newest'];
             const city: any = req.query.city;
-            const data = await db.collection("pfs-data").find({city: city.split(",")[0] }).sort(order).limit(50).toArray();
-            console.log(data);
+            const page = req.query.page as string || 1;
+            const perPage = 50;
+            // Obtain the collection filtering by city and ordering by the selected order with pagination
+            const data = await db.collection("pfs-data").
+                find({city: city.split(",")[0] }).skip((Number(page) - 1) * perPage)
+                .limit(perPage).sort(order).toArray();
             res.json(data);
         }catch(error) {
             console.log(error)

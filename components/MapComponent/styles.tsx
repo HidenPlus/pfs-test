@@ -138,7 +138,7 @@ export const SearchCityInput = styled.input`
 export const SuggestionContainer = styled.div`
     position: absolute;
     top: 30%;
-    right: 6px;
+    right: -2px;
     width: 38vw;
     background-color: #fff;
     border: 0.5px solid #999;

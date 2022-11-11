@@ -8,7 +8,6 @@ export default function NavItem({path, children, name}: MenuItem): JSX.Element {
     const handleHover = (state: boolean) => {
         setOpen(state);
     }
-    //fix hover on every ul with children, it opens multiples times
     return (
         <NavLi key={path}>
             <LinkStyled 
@@ -17,12 +16,13 @@ export default function NavItem({path, children, name}: MenuItem): JSX.Element {
                 $hasChildren={itsList} href={path}>
                 {name}
             </LinkStyled>
-            {itsList && open ? <NavChildrenList
-                                onMouseEnter={() => handleHover(true)}
-                                onMouseLeave={() => handleHover(false)} 
-                                >
-                                    {children?.map(item => <NavItem key={item.name} {...item}/>)}
-                                </NavChildrenList> : null}
+            {itsList && open ? 
+            <NavChildrenList
+              onMouseEnter={() => handleHover(true)}
+              onMouseLeave={() => handleHover(false)} 
+            >
+            {children?.map(item => <NavItem key={item.name} {...item}/>)}
+            </NavChildrenList> : null}
         </NavLi>
     )
 }

@@ -62,6 +62,7 @@ export const NavChildrenList = styled.ul`
     padding: 10px;
     background: #fff;
     border: 1px solid #ccc;
+    z-index: 100;
     li {
         margin: 0 1rem;
         text-align: center;

@@ -16,12 +16,53 @@ export const HousesLayout = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 100%;
+    max-height: 100vh;
+    height: 100vh;
+    overflow-x: auto;
     min-width: 900px;
     max-width: 900px;
     @media (max-width: 768px) {
         flex-direction: column;
     }
+`;
+
+export const TitleLayout = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+`;
+
+export const OrderLayout = styled.div`
+    display: flex;
+    flex-direction: row;
+    margin-right: 6rem;
+    justify-content: center;
+    align-items: center;
+`;
+
+export const OrderLabel = styled.label`
+    font-family: "gotham", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    margin-right: 0.5rem;
+    color: #404040;
+`;
+
+export const OrderSelect = styled.select`
+    color: #666;
+    border: 1px solid #eee;
+    padding: 5px;
+    border-radius: 0;
+    font-size: 16px;
+    font-weight: 400;
+`;
+
+export const OrderOption = styled.option`
+    color: #666;
+    font-size: 13px;
+    font-weight: 400;
 `;
 
 export const TitleBuyout = styled.h1`
@@ -107,4 +148,51 @@ export const HouseInfoText = styled.p`
     margin-left: 3px;
     margin-right: 10px;
     line-height: 3px;
+`;
+
+export const ButtonsLayout = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 0px 20px;
+    width: 100%;
+`;
+
+export const NextButton = styled.button`
+    background: #f9097d;
+    color: #000;
+    width: auto;
+    border-radius: 5px;
+    height: 35px;
+    padding: 0 10px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: gotham,sans-serif;
+    border: none;
+    cursor: pointer;
+    margin: 10px 20px;
+    &::after {
+        content: ">";
+        margin-left: 5px;
+    }
+`;
+
+export const PrevButton = styled.button`
+    background: #f9097d;
+    color: #000;
+    width: auto;
+    border-radius: 5px;
+    height: 35px;
+    padding: 0 10px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: gotham,sans-serif;
+    border: none;
+    cursor: pointer;
+    margin: 10px 20px;
+    &::before {
+        content: "<";
+        margin-left: 5px;
+    }
 `;

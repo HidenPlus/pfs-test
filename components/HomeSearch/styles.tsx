@@ -58,6 +58,9 @@ export const SearchBar = styled.input`
         font-family: gotham, sans-serif;
         font-weight: 300; 
     }
+    &:focus{
+        outline: none;
+    }
 `
 
 export const SearchBarButton = styled.button`
