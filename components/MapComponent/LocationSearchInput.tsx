@@ -35,7 +35,7 @@ function LocationSearchInput({searchCoords, setSearchCoords, setCityQuery}: Prop
       onSelect={handleSelect}
     >
       {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-        <div>
+        <div style={{position: "relative"}}>
           <SearchCityInput {...getInputProps({ placeholder: 'Ingrese por ciudad' })} />
 
           <SuggestionContainer>
