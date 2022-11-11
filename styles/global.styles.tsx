@@ -1,6 +1,12 @@
 import {createGlobalStyle} from "styled-components"
 
 export const GlobalStyle = createGlobalStyle`
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-size: 12px;
+    }
     :root {
         --bs-blue: #0d6efd;
         --bs-indigo: #6610f2;
