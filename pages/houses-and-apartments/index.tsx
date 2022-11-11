@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Image from "next/image"
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 import dynamic from "next/dynamic";
@@ -5,7 +6,7 @@ import MapComponent from "../../components/MapComponent";
 import { useRouter } from "next/router";
 import { MapAndHousesLayout } from "../../components/BuyoutComponent/styles";
 import BuyoutComponent from "../../components/BuyoutComponent";
-import { useState } from "react";
+import { menuItems } from "../../lib/utils";
 
 const NavHeader = dynamic<NavHeaderProps>(() => import("../../components/NavHeader"), { ssr: false });
 
@@ -16,9 +17,6 @@ type PageProps = {
   }
   
   export const getStaticProps: GetStaticProps<PageProps> = async () => {
-    const {URL} = process.env
-    const menuFetch = await fetch(URL + "/api/get-menu");
-    const menuItems = await menuFetch.json();
     return {
       props: {
         menuItems,

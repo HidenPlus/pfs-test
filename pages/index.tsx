@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import HomeSearch from "../components/HomeSearch";
+import { menuItems } from "../lib/utils";
 
 const NavHeader = dynamic<NavHeaderProps>(() => import("../components/NavHeader"), { ssr: false });
 
@@ -13,9 +14,6 @@ type PageProps = {
 }
 
 export const getStaticProps: GetStaticProps<PageProps> = async () => {
-  const {URL} = process.env
-  const menuFetch = await fetch(URL + "/api/get-menu");
-  const menuItems = await menuFetch.json();
   return {
     props: {
       menuItems,
