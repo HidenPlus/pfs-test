@@ -5,10 +5,10 @@ export const MarkerParent = styled.div`
     color: #000;
     background-color: #f9097d;
     font-size: 10px;
-    font-weight: 700;
+    font-weight: 600;
     text-align: center;
     width: 80px;
-    border: 2px solid #000;
+    border: 1px solid #000;
     white-space: nowrap;
     cursor: pointer;
 `;
@@ -33,7 +33,7 @@ export const MarkerInfo = styled.div<{show: boolean}>`
     border-radius: 10px;
     padding: 10px;
     width: 150px;
-    height: 100px;
+    height: 120px;
     display: ${props => props.show ? "flex" : "none"};
     flex-direction: column;
     justify-content: center;
@@ -70,7 +70,7 @@ export const HouseInfoLayout = styled.div`
 
 export const HouseInfo = styled.p`
     font-size: 12px;
-    font-weight: 700;
+    font-weight: 600;
     color: #000;
     margin: 0;
     white-space: normal;
@@ -96,12 +96,12 @@ export const CloseButton = styled.button`
 
 export const ShowPropertiesButton = styled.button`
     position: absolute;
-    bottom: 0;
-    left: 0;
+    bottom: 5px;
+    right: -10px;
     background-color: #fff;
     border: none;
     border-radius: 5px;
-    margin: 5px 20px;
+    margin: 0px 20px;
     width: 130px;
     height: 20px;
     display: flex;

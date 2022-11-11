@@ -127,7 +127,7 @@ export const PriceBuyout = styled.p`
     font-size: 18px;
     font-family: gotham,sans-serif;
     font-weight: 700;
-    margin: 5px 20px;
+    margin: 5px 0px;
 `;
 
 export const HouseInfoLayout = styled.div`
@@ -135,7 +135,7 @@ export const HouseInfoLayout = styled.div`
     flex-direction: row;
     justify-content: flex-start;
     align-items: baseline;
-    margin: 0px 20px;
+    margin: 0px 0px;
     width: 100%;
 `;
 
