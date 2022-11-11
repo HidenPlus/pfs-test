@@ -8,7 +8,8 @@ export const Header = styled.header`
     justify-content: space-around;
     align-items: center;
     padding: 0 1rem;
-    height: 6rem;
+    padding-top: 1rem;
+    height: 8rem;
     background-color: #fff;
     box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
     z-index: 100;

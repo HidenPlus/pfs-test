@@ -145,7 +145,7 @@ export const HouseInfoText = styled.p`
     font-weight: 400;
     margin-left: 3px;
     margin-right: 10px;
-    line-height: 3px;
+    line-height: 1.5;
 `;
 
 export const ButtonsLayout = styled.div`

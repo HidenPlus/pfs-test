@@ -64,14 +64,12 @@ export const SearchBar = styled.input`
 `
 
 export const SearchBarButton = styled.button`
-    position: absolute;
     border: 0;
     width: 60px;
     vertical-align: top;
     text-align: center;
     margin-top: 1rem;
-    right: 27%;
-    top: 27%;
+    margin-left: -3px;
     height: 50px;
     background-color: #a80552;
     color: #fff;
