@@ -10,7 +10,7 @@ export const LinkStyled = styled(Link)<{$hasChildren: boolean}>`
     text-decoration: none;
     color: #404040;
     font-family: gotham, sans-serif;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 300;
     text-transform: uppercase;
     position: relative;
