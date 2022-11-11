@@ -4,7 +4,7 @@ export const MapAndHousesLayout = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: center;
-    width: 100vw;
+    padding: 0 2rem;
     height: 100%;
     @media (max-width: 768px) {
         flex-direction: column-reverse;
@@ -19,8 +19,6 @@ export const HousesLayout = styled.div`
     max-height: 100vh;
     height: 100vh;
     overflow-x: auto;
-    min-width: 900px;
-    max-width: 900px;
     @media (max-width: 768px) {
         flex-direction: column;
     }
