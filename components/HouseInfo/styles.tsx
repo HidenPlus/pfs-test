@@ -23,7 +23,7 @@ export const InfoTitle = styled.h1`
     color: #262624;
     font-size: 2em;
     text-align: left;
-    margin-bottom: 0;
+    margin: 2rem 0; 
     padding-bottom: 0;
     font-weight: 700;
     display: inline;
